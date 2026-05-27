@@ -1,0 +1,467 @@
+// ── Variables ────────────────────────────────────────────────────────────────
+$bg-page:        #080a10;
+$bg-card:        rgba(15, 22, 36, 0.7);
+$bg-panel:       rgba(28, 38, 58, 0.4);
+$bg-input:       rgba(15, 23, 42, 0.55);
+$border-color:   rgba(255, 255, 255, 0.07);
+$text-primary:   #f8fafc;
+$text-muted:     #94a3b8;
+$accent:         #a78bfa;
+$accent-alt:     #c084fc;
+$badge-required: #f43f5e;
+$badge-best:     #10b981;
+$info-bg:        rgba(30, 41, 59, 0.5);
+$info-border:    rgba(167, 139, 250, 0.15);
+$font-stack:     'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+// ── Page Shell ───────────────────────────────────────────────────────────────
+.home-page {
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, 0.15) 0%, $bg-page 70%);
+    color: $text-primary;
+    font-family: $font-stack;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+    gap: 2.5rem;
+    overflow-x: hidden;
+}
+
+// ── Page Header ──────────────────────────────────────────────────────────────
+.page-header {
+    text-align: center;
+    max-width: 600px;
+    animation: fadeInUp 0.6s ease-out;
+
+    h1 {
+        font-size: 2.75rem;
+        font-weight: 800;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #a78bfa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    p {
+        color: $text-muted;
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    .highlight {
+        background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+    }
+}
+
+// ── Main Card ─────────────────────────────────────────────────────────────────
+.interview-card {
+    width: 100%;
+    max-width: 950px;
+    background: $bg-card;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid $border-color;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &__body {
+        display: flex;
+        min-height: 520px;
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 2rem;
+        border-top: 1px solid $border-color;
+        background: rgba(10, 15, 26, 0.4);
+
+        .footer-info {
+            font-size: 0.825rem;
+            color: $text-muted;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    }
+}
+
+// ── Panels ────────────────────────────────────────────────────────────────────
+.panel-divider {
+    width: 1px;
+    background-color: $border-color;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 1px;
+    }
+}
+
+.panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2.25rem 2rem;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.25rem;
+
+        h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: $text-primary;
+            flex: 1;
+            letter-spacing: -0.01em;
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        color: $accent;
+        background: rgba($accent, 0.1);
+        padding: 0.45rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba($accent, 0.15);
+    }
+
+    &__textarea {
+        flex: 1;
+        width: 100%;
+        background-color: $bg-input;
+        border: 1px solid $border-color;
+        border-radius: 0.75rem;
+        padding: 1rem 1.25rem;
+        color: $text-primary;
+        font-family: inherit;
+        font-size: 0.9rem;
+        resize: none;
+        outline: none;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        line-height: 1.6;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        &:focus {
+            border-color: $accent;
+            background-color: rgba(20, 27, 43, 0.6);
+            box-shadow: 0 0 0 3px rgba($accent, 0.15);
+        }
+
+        &--short {
+            flex: unset;
+            height: 110px;
+        }
+    }
+
+    &--left {
+        position: relative;
+
+        .char-counter {
+            position: absolute;
+            bottom: 3.25rem;
+            right: 2.75rem;
+            font-size: 0.75rem;
+            color: $text-muted;
+            background: rgba($bg-page, 0.6);
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+        }
+    }
+
+    &--right {
+        gap: 1rem;
+    }
+}
+
+// ── Badges ────────────────────────────────────────────────────────────────────
+.badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 0.375rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    &--required {
+        background-color: rgba($badge-required, 0.1);
+        color: $badge-required;
+        border: 1px solid rgba($badge-required, 0.2);
+    }
+
+    &--best {
+        background-color: rgba($badge-best, 0.1);
+        color: $badge-best;
+        border: 1px solid rgba($badge-best, 0.2);
+    }
+}
+
+// ── Section Label ─────────────────────────────────────────────────────────────
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 0.25rem;
+}
+
+// ── Dropzone ──────────────────────────────────────────────────────────────────
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
+    background-color: $bg-input;
+    border: 2px dashed rgba($accent, 0.25);
+    border-radius: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        border-color: $accent;
+        background-color: rgba($accent, 0.04);
+        box-shadow: 0 0 15px rgba($accent, 0.05);
+    }
+
+    &__icon {
+        color: $accent;
+        margin-bottom: 0.15rem;
+    }
+
+    &__title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: $text-primary;
+        margin: 0;
+    }
+
+    &__subtitle {
+        font-size: 0.775rem;
+        color: $text-muted;
+        margin: 0;
+    }
+}
+
+// ── OR Divider ────────────────────────────────────────────────────────────────
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: $text-muted;
+    font-size: 0.775rem;
+    font-weight: 600;
+
+    &::before,
+    &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background-color: $border-color;
+    }
+
+    span {
+        white-space: nowrap;
+    }
+}
+
+// ── Self Description ──────────────────────────────────────────────────────────
+.self-description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+// ── Info Box ──────────────────────────────────────────────────────────────────
+.info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.85rem 1.15rem;
+    background-color: $info-bg;
+    border: 1px solid $info-border;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    &__icon {
+        flex-shrink: 0;
+        color: $accent;
+        margin-top: 2px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.825rem;
+        color: rgba($accent-alt, 0.85);
+        line-height: 1.55;
+
+        strong {
+            color: $text-primary;
+            font-weight: 600;
+        }
+    }
+}
+
+// ── Generate Button ───────────────────────────────────────────────────────────
+.generate-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    background: linear-gradient(135deg, #ff2d78 0%, #d20d3b 100%);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 14px rgba(255, 45, 120, 0.25);
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(255, 45, 120, 0.4);
+        opacity: 0.95;
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+}
+
+.recent-reports {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 950px;
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+
+    h2 {
+        font-size: 1.35rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .reports-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.25rem;
+        padding: 0;
+        list-style: none;
+
+        .report-item {
+            background-color: $bg-card;
+            border: 1px solid $border-color;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+            &:hover {
+                transform: translateY(-2px);
+                border-color: rgba($accent, 0.3);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: $text-primary;
+                margin: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .report-meta {
+                font-size: 0.8rem;
+                color: $text-muted;
+                margin: 0;
+            }
+
+            .match-score {
+                font-size: 0.85rem;
+                font-weight: 700;
+                color: $accent;
+                margin-top: 0.25rem;
+                display: flex;
+                align-items: center;
+                gap: 0.35rem;
+
+                &.score--high {
+                    color: $badge-best;
+                }
+                &.score--mid {
+                    color: #eab308;
+                }
+                &.score--low {
+                    color: $badge-required;
+                }
+            }
+        }
+    }
+}
+
+// ── Page Footer ───────────────────────────────────────────────────────────────
+.page-footer {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+
+    a {
+        font-size: 0.85rem;
+        color: $text-muted;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover {
+            color: $accent;
+        }
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
