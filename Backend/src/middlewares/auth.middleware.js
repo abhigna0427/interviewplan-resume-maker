@@ -11,7 +11,6 @@ const isAuthenticated = async (req, res, next) => {
             });
         }
 
-        // Check if token is blacklisted
         const isBlacklisted = await BlacklistToken.findOne({ token });
         if (isBlacklisted) {
             return res.status(401).json({
