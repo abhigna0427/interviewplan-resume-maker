@@ -43,8 +43,8 @@ const registerUserController = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: true,
+            sameSite: "none"
         });
 
         res.status(201).json({
@@ -100,8 +100,8 @@ const loginUserController = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: true,
+            sameSite: "none"
         });
 
         res.status(200).json({
@@ -124,7 +124,11 @@ const logoutUserController = async (req, res) => {
             // Save token to blacklist database
             await BlacklistToken.create({ token });
         }
-        res.clearCookie("token");
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none"
+        });
         res.status(200).json({
             success: true,
             message: "Logged out successfully"
